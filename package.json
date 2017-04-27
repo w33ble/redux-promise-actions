@@ -4,10 +4,10 @@
   "description": "Flux Standard Action async utilities for Redux.",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint",
-    "test": "ava",
-    "test:dev": "ava --watch",
-    "test:all": "npm run lint && npm run test"
+    "lint": "eslint src/**/*.js",
+    "test": "npm run lint && npm run test:only",
+    "test:only": "ava",
+    "test:dev": "ava --watch"
   },
   "repository": {
     "type": "git",
