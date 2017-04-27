@@ -27,7 +27,20 @@
     "url": "https://github.com/w33ble/redux-promise-actions/issues"
   },
   "homepage": "https://github.com/w33ble/redux-promise-actions",
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  },
+  "dependencies": {
+    "redux-actions": "^2.0.2"
+  },
   "devDependencies": {
+    "ava": "^0.19.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.24.1",
     "eslint": "~3.19.0",
     "eslint-config-airbnb": "~14.1.0",
     "eslint-plugin-import": "~2.2.0",
