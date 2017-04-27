@@ -117,5 +117,5 @@ test('actionHandler dispatches request & error actions in order if rejected', (t
 
   const actionHandler = nextHandler();
   return actionHandler(fsaActionObj)
-  .catch(() => 'silence'); //silence the rejected promise
+  .catch(() => 'silence'); // silence the rejected promise
 });
