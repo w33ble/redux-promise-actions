@@ -1,1 +1,5 @@
-export middleware from './src/middleware';
+const middleware = require('./src/middleware');
+
+module.exports = {
+  middleware,
+};

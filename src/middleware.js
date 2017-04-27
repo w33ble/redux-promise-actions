@@ -1,6 +1,6 @@
-import { createAction } from 'redux-actions';
-import { isPlainObject, isFunction } from '@w33bletools/simpleutils';
-import isFSA from './lib/is_fsa';
+const { createAction } = require('redux-actions');
+const { isPlainObject, isFunction } = require('@w33bletools/simpleutils');
+const isFSA = require('./lib/is_fsa');
 
 function isPromise(val) {
   return val && typeof val.then === 'function';
@@ -16,7 +16,7 @@ const getActions = (type, meta) => {
   };
 };
 
-export default function promiseMiddleware({ dispatch, getState }) {
+module.exports = function promiseMiddleware({ dispatch, getState }) {
   return next => (action) => {
     if (!isFSA(action)) {
       return isPromise(action) ? action.then(dispatch) : next(action);
@@ -41,4 +41,4 @@ export default function promiseMiddleware({ dispatch, getState }) {
 
     return next(action);
   };
-}
+};
