@@ -1,5 +1,7 @@
 # redux-promise-actions
 
+[![Build Status](https://travis-ci.org/w33ble/redux-promise-actions.svg?branch=master)](https://travis-ci.org/w33ble/redux-promise-actions)
+
 [Flux Standard Action](https://github.com/acdlite/flux-standard-action) promise utilities for Redux.
 
 Functions similar to [redux-promise](https://github.com/acdlite/redux-promise), but dispatches extra actions when met with a Promise as the payload. 
