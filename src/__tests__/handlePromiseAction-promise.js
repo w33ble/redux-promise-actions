@@ -1,5 +1,6 @@
 import test from 'ava';
 import handlePromiseAction from '../handlePromiseAction';
+import { request, ok, error } from '../actionTypes';
 
 // let actionCreator;
 let type;
@@ -17,8 +18,8 @@ test.beforeEach(() => {
   };
 });
 
-test('should create REQUEST type reducer', (t) => {
-  const checkType = `${type}_REQUEST`;
+test('should create request type reducer', (t) => {
+  const checkType = `${type}_${request}`;
   const okAction = Object.assign({}, fsaAction, { type: checkType });
 
   const reducerFn = (state, action) => {
@@ -32,8 +33,8 @@ test('should create REQUEST type reducer', (t) => {
   t.deepEqual(reducer(undefined, okAction), { counter: 7 });
 });
 
-test('should create OK type reducer', (t) => {
-  const checkType = `${type}_OK`;
+test('should create ok type reducer', (t) => {
+  const checkType = `${type}_${ok}`;
   const okAction = Object.assign({}, fsaAction, { type: checkType });
 
   const reducerFn = (state, action) => {
@@ -47,8 +48,8 @@ test('should create OK type reducer', (t) => {
   t.deepEqual(reducer(undefined, okAction), { counter: 7 });
 });
 
-test('should create ERROR type reducer', (t) => {
-  const checkType = `${type}_ERROR`;
+test('should create error type reducer', (t) => {
+  const checkType = `${type}_${error}`;
   const okAction = Object.assign({}, fsaAction, { type: checkType });
 
   const reducerFn = (state, action) => {

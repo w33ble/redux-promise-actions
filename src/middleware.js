@@ -1,5 +1,6 @@
 const { createAction } = require('redux-actions');
 const { isPlainObject, isFunction } = require('@w33bletools/simpleutils');
+const actionTypes = require('./actionTypes');
 const isFSA = require('./lib/is_fsa');
 
 function isPromise(val) {
@@ -16,11 +17,13 @@ function hasCallback(meta, name) {
 
 function getActions(type, meta) {
   const metaObj = (isPlainObject(meta) || isUndefined(meta)) ? meta : { meta };
+  const loadingMeta = () => Object.assign({}, metaObj, { loading: true });
+  const loadedMeta = () => Object.assign({}, metaObj, { loading: false });
 
   return {
-    request: createAction(`${type}_REQUEST`, null, () => Object.assign({}, metaObj, { loading: true })),
-    ok: createAction(`${type}_OK`, null, () => Object.assign({}, metaObj, { loading: false })),
-    error: createAction(`${type}_ERROR`, null, () => Object.assign({}, metaObj, { loading: false })),
+    request: createAction(`${type}_${actionTypes.request}`, null, loadingMeta),
+    ok: createAction(`${type}_${actionTypes.ok}`, null, loadedMeta),
+    error: createAction(`${type}_${actionTypes.error}`, null, loadedMeta),
   };
 }
 
