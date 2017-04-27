@@ -11,6 +11,11 @@ test.beforeEach(() => {
   nextHandler = middleware({ dispatch: doDispatch, getState: doGetState });
 });
 
+test('must throw if argument is non-object', (t) => {
+  const check = () => middleware();
+  t.throws(check);
+});
+
 test('nextHandler returns a function to handle next', (t) => {
   t.is(typeof nextHandler, 'function');
   t.is(nextHandler.length, 1);
@@ -118,4 +123,78 @@ test('actionHandler dispatches request & error actions in order if rejected', (t
   const actionHandler = nextHandler();
   return actionHandler(fsaActionObj)
   .catch(() => 'silence'); // silence the rejected promise
+});
+
+test('adding loading info to metadata onto the action', (t) => {
+  t.plan(2);
+  let callIndex = 0;
+
+  doDispatch = (action) => {
+    const metaObj = (callIndex === 0) ? { loading: true } : { loading: false };
+    t.deepEqual(action.meta, metaObj);
+    callIndex += 1;
+  };
+  nextHandler = middleware({ dispatch: doDispatch, getState: doGetState });
+
+  const fsaActionObj = {
+    type: 'test',
+    payload: Promise.resolve('yup'),
+  };
+
+  const actionHandler = nextHandler();
+  return actionHandler(fsaActionObj);
+});
+
+test('mixes metadata onto onto the action', (t) => {
+  t.plan(2);
+  let callIndex = 0;
+
+  doDispatch = (action) => {
+    const metaObj = (callIndex === 0) ? {
+      loading: true,
+      msg: 'i am metadata',
+    } : {
+      loading: false,
+      msg: 'i am metadata',
+    };
+    t.deepEqual(action.meta, metaObj);
+    callIndex += 1;
+  };
+  nextHandler = middleware({ dispatch: doDispatch, getState: doGetState });
+
+  const fsaActionObj = {
+    type: 'test',
+    payload: Promise.resolve('yup'),
+    meta: { msg: 'i am metadata' },
+  };
+
+  const actionHandler = nextHandler();
+  return actionHandler(fsaActionObj);
+});
+
+test('mixes metadata onto onto the action, adds non-object meta to meta key', (t) => {
+  t.plan(2);
+  let callIndex = 0;
+
+  doDispatch = (action) => {
+    const metaObj = (callIndex === 0) ? {
+      loading: true,
+      meta: 'i am metadata',
+    } : {
+      loading: false,
+      meta: 'i am metadata',
+    };
+    t.deepEqual(action.meta, metaObj);
+    callIndex += 1;
+  };
+  nextHandler = middleware({ dispatch: doDispatch, getState: doGetState });
+
+  const fsaActionObj = {
+    type: 'test',
+    payload: Promise.resolve('yup'),
+    meta: 'i am metadata',
+  };
+
+  const actionHandler = nextHandler();
+  return actionHandler(fsaActionObj);
 });
