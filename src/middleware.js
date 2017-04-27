@@ -6,15 +6,23 @@ function isPromise(val) {
   return val && typeof val.then === 'function';
 }
 
-const getActions = (type, meta) => {
-  const metaObj = (isPlainObject(meta) || typeof meta === 'undefined') ? meta : { meta };
+function isUndefined(val) {
+  return typeof val === 'undefined';
+}
+
+function hasCallback(meta, name) {
+  return (meta && isFunction(meta[name]));
+}
+
+function getActions(type, meta) {
+  const metaObj = (isPlainObject(meta) || isUndefined(meta)) ? meta : { meta };
 
   return {
     request: createAction(`${type}_REQUEST`, null, () => Object.assign({}, metaObj, { loading: true })),
     ok: createAction(`${type}_OK`, null, () => Object.assign({}, metaObj, { loading: false })),
     error: createAction(`${type}_ERROR`, null, () => Object.assign({}, metaObj, { loading: false })),
   };
-};
+}
 
 module.exports = function promiseMiddleware({ dispatch, getState }) {
   return next => (action) => {
@@ -29,11 +37,11 @@ module.exports = function promiseMiddleware({ dispatch, getState }) {
 
       return action.payload
       .then((result) => {
-        const hasCallback = (action.meta && isFunction(action.meta.callback));
-        if (hasCallback) action.meta.callback(dispatch, getState, result);
+        if (hasCallback(action.meta, 'onComplete')) action.meta.onComplete(dispatch, getState, result);
         return dispatch(ok(result));
       })
       .catch((err) => {
+        if (hasCallback(action.meta, 'onFailure')) action.meta.onFailure(dispatch, getState);
         dispatch(error(err));
         return Promise.reject(err);
       });
