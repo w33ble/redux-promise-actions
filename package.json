@@ -1,0 +1,37 @@
+{
+  "name": "redux-promise-actions",
+  "version": "0.1.0",
+  "description": "Flux Standard Action async utilities for Redux.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint",
+    "test": "ava",
+    "test:dev": "ava --watch",
+    "test:all": "npm run lint && npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w33ble/redux-promise-actions.git"
+  },
+  "keywords": [
+    "flux",
+    "redux",
+    "fsa",
+    "actions",
+    "async",
+    "promise"
+  ],
+  "author": "Joe Fleming (https://github.com/w33ble)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/w33ble/redux-promise-actions/issues"
+  },
+  "homepage": "https://github.com/w33ble/redux-promise-actions",
+  "devDependencies": {
+    "eslint": "~3.19.0",
+    "eslint-config-airbnb": "~14.1.0",
+    "eslint-plugin-import": "~2.2.0",
+    "eslint-plugin-jsx-a11y": "~4.0.0",
+    "eslint-plugin-react": "~6.10.3"
+  }
+}
