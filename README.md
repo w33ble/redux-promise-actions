@@ -1,5 +1,6 @@
 # redux-promise-actions
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/w33ble/redux-promise-actions/master/LICENSE)
 [![Build Status](https://travis-ci.org/w33ble/redux-promise-actions.svg?branch=master)](https://travis-ci.org/w33ble/redux-promise-actions)
 
 [Flux Standard Action](https://github.com/acdlite/flux-standard-action) promise utilities for Redux. 
