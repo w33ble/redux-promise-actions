@@ -21,8 +21,10 @@ npm install --save redux-promise-actions
 Apply the middleware to your Redux store. It works similarly to [redux-promise](https://github.com/acdlite/redux-promise), allowing you to simply use a Promise in your action's payload wihout any extra work.
 
 ```js
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { middleware } from 'redux-promise-actions';
+import rootReducer from './path/to/root_reducer';
+const initialState = {};
 const store = createStore(rootReducer, initialState, applyMiddleware(middleware));
 ```
 
@@ -32,8 +34,8 @@ This is best used with [redux-actions](https://github.com/acdlite/redux-actions)
 
 ```js
 // using redux-actions
-import { ADD_TODO } from '../actionTypes'
 import { createAction } from 'redux-actions';
+import { ADD_TODO } from '../actionTypes'
 
 export addTodo = createAction(ADD_TODO, Promise.resolve);
 ```
@@ -57,8 +59,8 @@ When you use an FSA-compliant action with a Promise payload, the middleware will
 The most seamless way to deal with these states is to use the `handlePromiseAction` reducer creator included in this module.
 
 ```js
-import { ADD_TODO } from '../actionTypes'
 import { handlePromiseAction } from 'redux-promise-actions';
+import { ADD_TODO } from '../actionTypes'
 
 
 handlePromiseAction(ADD_TODO, (state, action) => {
@@ -95,8 +97,8 @@ This action fires when the promise successfully resolves. `action.meta.loading` 
 This action fires when the promise is rejected. `action.meta.loading` is `false`.
 
 ```js
-import { ADD_TODO } from '../actionTypes'
 import { handlePromiseAction } from 'redux-promise-actions';
+import { ADD_TODO } from '../actionTypes'
 
 return reducer((state, action) => {
   switch(action.type) {
@@ -135,8 +137,8 @@ If you are using `redux-actions`, you can configure callbacks on your actions us
 
 ```js
 // using redux-actions
-import { ADD_TODO, ANOTHER_ACTION } from '../actionTypes'
 import { createAction } from 'redux-actions';
+import { ADD_TODO, ANOTHER_ACTION } from '../actionTypes'
 
 export someOtherActionCreator = createAction(ANOTHER_ACTION);
 
