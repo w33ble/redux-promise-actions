@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
+import { isFunction } from '@w33bletools/simpleutils';
 import isFSA from './lib/is_fsa';
-import { isFunction } from './lib/utils';
 
 function isPromise(val) {
   return val && typeof val.then === 'function';

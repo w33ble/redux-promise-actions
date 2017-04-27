@@ -1,4 +1,4 @@
-import { isPlainObject, isString, isSymbol } from './utils';
+import { isPlainObject, isString, isSymbol } from '@w33bletools/simpleutils';
 
 function isValidKey(key) {
   return [
