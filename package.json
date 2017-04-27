@@ -1,6 +1,6 @@
 {
   "name": "redux-promise-actions",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Flux Standard Action async utilities for Redux.",
   "main": "index.js",
   "scripts": {
