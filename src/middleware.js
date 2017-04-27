@@ -1,16 +1,20 @@
 import { createAction } from 'redux-actions';
-import { isFunction } from '@w33bletools/simpleutils';
+import { isPlainObject, isFunction } from '@w33bletools/simpleutils';
 import isFSA from './lib/is_fsa';
 
 function isPromise(val) {
   return val && typeof val.then === 'function';
 }
 
-const getActions = (type, meta) => ({
-  request: createAction(`${type}_REQUEST`, null, () => Object.assign({}, meta, { loading: true })),
-  ok: createAction(`${type}_OK`, null, () => Object.assign({}, meta, { loading: false })),
-  error: createAction(`${type}_ERROR`, null, () => Object.assign({}, meta, { loading: false })),
-});
+const getActions = (type, meta) => {
+  const metaObj = (isPlainObject(meta) || typeof meta === 'undefined') ? meta : { meta };
+
+  return {
+    request: createAction(`${type}_REQUEST`, null, () => Object.assign({}, metaObj, { loading: true })),
+    ok: createAction(`${type}_OK`, null, () => Object.assign({}, metaObj, { loading: false })),
+    error: createAction(`${type}_ERROR`, null, () => Object.assign({}, metaObj, { loading: false })),
+  };
+};
 
 export default function promiseMiddleware({ dispatch, getState }) {
   return next => (action) => {
