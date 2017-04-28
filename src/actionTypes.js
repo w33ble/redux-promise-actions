@@ -1,5 +1,5 @@
 module.exports = {
   request: 'REQUEST',
-  ok: 'OK',
+  ok: 'SUCCESS',
   error: 'ERROR',
 };

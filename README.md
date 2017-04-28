@@ -118,7 +118,7 @@ If you rather write your reducers completely by hand, that's also possible. The 
 
 This action fires immediately, before the promise resolves or rejects. `action.meta.loading` is `true`.
 
-#### `<type>_OK`
+#### `<type>_SUCCESS`
 
 This action fires when the promise successfully resolves. `action.meta.loading` is `false`.
 
@@ -136,7 +136,7 @@ return reducer((state, action) => {
       // handle the request action
       break;
 
-    case ADD_TODO_OK:
+    case ADD_TODO_SUCCESS:
       // handle the successful promise resolution
       break;
 
