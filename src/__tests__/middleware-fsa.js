@@ -1,5 +1,6 @@
 import test from 'ava';
 import middleware from '../middleware';
+import { onRequest, onSuccess, onError } from '../helpers';
 
 let doDispatch;
 let doGetState;
@@ -47,7 +48,7 @@ test('actionHandler passes FSA action to next if not a promise', (t) => {
 test('actionHandler returns value as expected if FSA payload promise', (t) => {
   t.plan(1);
   const expected = {
-    type: 'test_OK',
+    type: onSuccess('test'),
     payload,
     meta: {
       loading: false,
@@ -62,7 +63,7 @@ test('actionHandler returns value as expected if FSA payload promise', (t) => {
 
 test('actionHandler dispatches request & ok actions in order if resolved', (t) => {
   t.plan(2);
-  const actionTypes = ['test_REQUEST', 'test_OK'];
+  const actionTypes = [onRequest('test'), onSuccess('test')];
 
   nextHandler = createActionTypeHandler(t, actionTypes);
 
@@ -72,7 +73,7 @@ test('actionHandler dispatches request & ok actions in order if resolved', (t) =
 
 test('actionHandler dispatches request & error actions in order if rejected', (t) => {
   t.plan(2);
-  const actionTypes = ['test_REQUEST', 'test_ERROR'];
+  const actionTypes = [onRequest('test'), onError('test')];
   const action = Object.assign({}, fsaActionObj, { payload: Promise.reject('nope') });
 
   nextHandler = createActionTypeHandler(t, actionTypes);
