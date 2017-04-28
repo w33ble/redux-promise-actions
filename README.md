@@ -69,21 +69,49 @@ handlePromiseAction(ADD_TODO, (state, action) => {
   // and again when it resolves or rejects
 
   // use the action's 'meta.loading' and 'error' properties accordingly
-  if (!action.meta.loading && !action.error) {
+  if (!action.meta.loading) {
     // the promise is ready
-    // the promise has resolved successfully
-    // return your modified state
-  } else {
-    // the promise is ready
-    // the promise rejected
-    // handle handle the error somehow
+  
+    if (!action.error) {
+      // the promise has resolved successfully
+      // return your modified state
+    } else {
+      // the promise rejected
+      // handle handle the error somehow
+    }
   }
 
   return state;
 })
 ```
 
-You can also write your reducers by hand. The actions types are named as follows:
+### Create your reducer using action type helpers
+
+If the reducer wrapper is too much for you, you can use the included helpers to generate the associated action types for you.
+
+```js
+import { onRequest, onSuccess, onError } from 'redux-promise-actions';
+import { ADD_TODO } from '../actionTypes'
+
+
+return reducer((state, action) => {
+  switch(action.type) {
+    case onRequest(ADD_TODO):
+      // handle the request action
+      break;
+    case onSuccess(ADD_TODO):
+      // handle the successful promise resolution
+      break;
+    case onError(ADD_TODO):
+      // handle the promise rejection
+      break;
+  }
+});
+```
+
+### Create your reducer completely by hand
+
+If you rather write your reducers completely by hand, that's also possible. The actions types are named as follows:
 
 #### `<type>_REQUEST`
 
@@ -104,20 +132,16 @@ import { ADD_TODO } from '../actionTypes'
 return reducer((state, action) => {
   switch(action.type) {
     case ADD_TODO_REQUEST:
-      // happens before promise resultion
+      // handle the request action
       break;
 
     case ADD_TODO_OK:
-      // happens when the promise successfully resolves
+      // handle the successful promise resolution
       break;
 
     case ADD_TODO_ERROR:
-      // happens when the promise rejected
+      // handle the promise rejection
       break;
-
-    default:
-      // some other action has happened
-      return state;
   }
 })
 ```
