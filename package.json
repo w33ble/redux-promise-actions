@@ -7,8 +7,7 @@
     "lint": "eslint src/**/*.js",
     "test": "npm run lint && npm run test:only",
     "test:only": "ava",
-    "test:dev": "ava --watch",
-    "prepare": "npm run test"
+    "test:dev": "ava --watch"
   },
   "repository": {
     "type": "git",
