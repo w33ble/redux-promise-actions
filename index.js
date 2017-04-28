@@ -1,11 +1,14 @@
 const middleware = require('./src/middleware');
 const handlePromiseAction = require('./src/handlePromiseAction');
-const { onRequest, onSuccess, onError } = require('./src/helpers');
+const helpers = require('./src/helpers');
 
 module.exports = {
   middleware,
   handlePromiseAction,
-  onRequest,
-  onSuccess,
-  onError,
+  onRequest: helpers.onRequest,
+  onSuccess: helpers.onSuccess,
+  onError: helpers.onError,
+  isLoading: helpers.isLoading,
+  isResolved: helpers.isResolved,
+  isRejected: helpers.isRejected,
 };
