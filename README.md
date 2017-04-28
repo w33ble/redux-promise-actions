@@ -58,28 +58,27 @@ export addTodo = (payload) => ({
 
 When you use an FSA-compliant action with a Promise payload, the middleware will turn your action into 3 different actions, one that fires immediately, one for the promise resolution, and one for the promise failure. You can use the FSA action's `meta` property to check the loading state of the action. 
 
-The most seamless way to deal with these states is to use the `handlePromiseAction` reducer creator included in this module.
+The most seamless way to deal with these states is to use the `handlePromiseAction` reducer creator included in this module. The reducer is called at least twice, first *before* promise resultion, and again when it resolves or rejects.
 
 ```js
-import { handlePromiseAction } from 'redux-promise-actions';
+import { handlePromiseAction, isLoading, isResolved, isRejected } from 'redux-promise-actions';
 import { ADD_TODO } from '../actionTypes'
 
-
 handlePromiseAction(ADD_TODO, (state, action) => {
-  // reducer is called at least twice, first before promise resultion, 
-  // and again when it resolves or rejects
+  // alternatively, use the action's 'meta.loading' property
+  if (isLoading(action)) {
+    // promise is still not resolved
+  }
 
-  // use the action's 'meta.loading' and 'error' properties accordingly
-  if (!action.meta.loading) {
-    // the promise is ready
-  
-    if (!action.error) {
-      // the promise has resolved successfully
-      // return your modified state
-    } else {
-      // the promise rejected
-      // handle handle the error somehow
-    }
+  // alternatively, use the action's 'meta.loading' and 'error' properties
+  if (isResolved(action)) {
+    // promise has resolved, reduce your state
+  }
+
+  // alternatively, use the action's 'meta.loading' and 'error' properties
+  if (isRejected(action)) {
+    // promise was rejected, handle the error somehow
+
   }
 
   return state;
