@@ -38,13 +38,21 @@ module.exports = function promiseMiddleware({ dispatch, getState }) {
     if (isPromise(action.payload)) {
       dispatch(request());
 
+      if (hasCallback(action.meta, 'onStart')) {
+        action.meta.onStart(dispatch, getState);
+      }
+
       return action.payload
       .then((result) => {
-        if (hasCallback(action.meta, 'onComplete')) action.meta.onComplete(dispatch, getState, result);
+        if (hasCallback(action.meta, 'onComplete')) {
+          action.meta.onComplete(dispatch, getState, result);
+        }
         return dispatch(ok(result));
       })
       .catch((err) => {
-        if (hasCallback(action.meta, 'onFailure')) action.meta.onFailure(dispatch, getState);
+        if (hasCallback(action.meta, 'onFailure')) {
+          action.meta.onFailure(dispatch, getState);
+        }
         dispatch(error(err));
         return Promise.reject(err);
       });
