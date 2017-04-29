@@ -1,5 +1,13 @@
 # Change Log
 
+## [0.5.0](https://github.com/w33ble/redux-promise-actions/tree/v0.5.0)
+
+- Add `onStart` callback support
+
+## [0.4.1](https://github.com/w33ble/redux-promise-actions/tree/v0.4.1)
+
+- Export the state helpers
+
 ## [0.4.0](https://github.com/w33ble/redux-promise-actions/tree/v0.4.0)
 
 - *BREAKING* Changed `OK` action suffix to `SUCCESS`

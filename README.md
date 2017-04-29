@@ -150,6 +150,10 @@ return reducer((state, action) => {
 
 If you need redux-thunk-like access to your store's `dispatch` or `getState` functions, you do that using the `meta` property of the action. There are two callbacks you can add to your promise actions:
 
+#### `onStart(dispatch, getState)`
+
+This is called immediately when the action is dispatched.
+
 #### `onComplete(dispatch, getState, resolvedPayload)`
 
 This is called when the promise resolves successfully.
@@ -168,6 +172,7 @@ import { ADD_TODO, ANOTHER_ACTION } from '../actionTypes'
 export someOtherActionCreator = createAction(ANOTHER_ACTION);
 
 export addTodo = createAction(ADD_TODO, Promise.resolve, () => {
+  onStart: (dispatch, getState) => dispatch(someOtherActionCreator()),
   onComplete: (dispatch, getState, resovledPayload) => dispatch(someOtherActionCreator()),
   onFailure: (dispatch, getState) => dispatch(someOtherActionCreator()),
 });
@@ -183,8 +188,9 @@ export addTodo = (payload) => ({
   type: ADD_TODO, 
   payload: Promise.resolve(payload),
   meta: {
+    onStart: (dispatch, getState) => dispatch(someOtherActionCreator()),
     onComplete: (dispatch, getState, resovledPayload) => dispatch(someOtherActionCreator()),
-    onFailure: (dispatch, getState, resovledPayload) => dispatch(someOtherActionCreator()),
+    onFailure: (dispatch, getState) => dispatch(someOtherActionCreator()),
   },
 })
 ```
