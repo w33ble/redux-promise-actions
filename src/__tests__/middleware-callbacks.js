@@ -18,7 +18,7 @@ test.beforeEach(() => {
   };
 });
 
-test.serial('calls onComplete on resolve, passing dispatch and getState', (t) => {
+test.serial('calls onComplete on resolve, passing dispatch, getState, and results', (t) => {
   t.plan(3);
   const onComplete = (dispatch, getState, results) => {
     t.is(dispatch, doDispatch);
@@ -41,6 +41,47 @@ test.serial('calls onFailure on reject, passing dispatch and getState', (t) => {
   const actionObj = Object.assign({}, fsaActionObj, {
     payload: Promise.reject('fail'),
     meta: { onFailure },
+  });
+  const actionHandler = nextHandler();
+  return actionHandler(actionObj).catch(() => {}); // silence the rejected promise
+});
+
+test.serial('calls onStart before resolution, passing dispatch and getState', (t) => {
+  t.plan(3);
+  let startCalled = false;
+
+  const onStart = (dispatch, getState) => {
+    t.is(dispatch, doDispatch);
+    t.is(getState, doGetState);
+    startCalled = true;
+  };
+
+  const onComplete = () => {
+    t.true(startCalled);
+  };
+
+  const actionObj = Object.assign({}, fsaActionObj, { meta: { onStart, onComplete } });
+  const actionHandler = nextHandler();
+  return actionHandler(actionObj);
+});
+
+test.serial('calls onStart before rejection, passing dispatch and getState', (t) => {
+  t.plan(3);
+  let startCalled = false;
+
+  const onStart = (dispatch, getState) => {
+    t.is(dispatch, doDispatch);
+    t.is(getState, doGetState);
+    startCalled = true;
+  };
+
+  const onFailure = () => {
+    t.true(startCalled);
+  };
+
+  const actionObj = Object.assign({}, fsaActionObj, {
+    payload: Promise.reject('fail'),
+    meta: { onStart, onFailure },
   });
   const actionHandler = nextHandler();
   return actionHandler(actionObj).catch(() => {}); // silence the rejected promise
