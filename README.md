@@ -146,9 +146,9 @@ return reducer((state, action) => {
 })
 ```
 
-### Dispatching on Completion or Error
+### Dispatching on Promise Lifecycle
 
-If you need redux-thunk-like access to your store's `dispatch` or `getState` functions, you do that using the `meta` property of the action. There are two callbacks you can add to your promise actions:
+If you need redux-thunk-like access to your store's `dispatch` or `getState` functions, you do that using the `meta` property of the action. There are additional callbacks you can add to your promise actions:
 
 #### `onStart(dispatch, getState)`
 
@@ -162,7 +162,7 @@ This is called when the promise resolves successfully.
 
 This is called when the promise rejects.
 
-If you are using `redux-actions`, you can configure callbacks on your actions using the `metaCreator` function in `createAction`:
+If you are using `redux-actions`, you can configure callbacks on your actions using the `metaCreator` function in `createAction` ([docs](https://github.com/acdlite/redux-actions#usage)):
 
 ```js
 // using redux-actions
