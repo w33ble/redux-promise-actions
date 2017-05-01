@@ -17,12 +17,25 @@ test('throws when defaultState is not defined', (t) => {
 });
 
 test('throws if reducer is the wrong type', (t) => {
-  const wrongTypeReducers = [1, 'string', [], null];
+  const wrongTypeReducers = [1, 'string', []];
 
   wrongTypeReducers.forEach((wrong) => {
     const check = () => handlePromiseAction(type, wrong, {});
     const err = t.throws(check);
     t.regex(err.message, /Expected.+function or object/);
+  });
+});
+
+test('uses identity function with null reducer', (t) => {
+  const okTypeReducers = [null, undefined];
+  const action = {
+    type: 'TEST',
+    payload: 100,
+  };
+
+  okTypeReducers.forEach((ok) => {
+    const reducer = handlePromiseAction(type, ok, defaultState);
+    t.deepEqual(reducer(undefined, action), { counter: 0 });
   });
 });
 
