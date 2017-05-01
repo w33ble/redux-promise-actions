@@ -1,1 +1,6 @@
+.DS_Store
+.*.swp
+yarn.lock
 src/__tests__/
+coverage
+.nyc_output

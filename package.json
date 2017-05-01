@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint src/**/*.js",
     "test": "npm run lint && npm run test:only",
-    "test:only": "ava",
+    "test:only": "nyc ava",
     "test:dev": "ava --watch"
   },
   "repository": {
@@ -37,6 +37,7 @@
     "eslint-config-airbnb": "~14.1.0",
     "eslint-plugin-import": "~2.2.0",
     "eslint-plugin-jsx-a11y": "~4.0.0",
-    "eslint-plugin-react": "~6.10.3"
+    "eslint-plugin-react": "~6.10.3",
+    "nyc": "^10.3.0"
   }
 }
