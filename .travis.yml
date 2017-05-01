@@ -11,3 +11,6 @@ branches:
   only:
     - master
     - /^v[0-9].*$/
+
+after_success:
+  - npm run report-coverage -- -e TRAVIS_NODE_VERSION
