@@ -1,4 +1,8 @@
-# Change Log
+# Changelog
+
+## [0.5.1](https://github.com/w33ble/redux-promise-actions/tree/v0.5.1)
+
+- Allow the use of `null` reducer
 
 ## [0.5.0](https://github.com/w33ble/redux-promise-actions/tree/v0.5.0)
 
