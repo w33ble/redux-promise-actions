@@ -28,6 +28,9 @@
     "url": "https://github.com/w33ble/redux-promise-actions/issues"
   },
   "homepage": "https://github.com/w33ble/redux-promise-actions",
+  "engines" : {
+    "node" : ">=6.0.0"
+  },
   "dependencies": {
     "@w33bletools/simpleutils": "^1.0.1",
     "redux-actions": "^2.0.2"
