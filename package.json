@@ -1,6 +1,6 @@
 {
   "name": "redux-promise-actions",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Flux Standard Action async utilities for Redux.",
   "main": "index.js",
   "scripts": {
@@ -28,8 +28,8 @@
     "url": "https://github.com/w33ble/redux-promise-actions/issues"
   },
   "homepage": "https://github.com/w33ble/redux-promise-actions",
-  "engines" : {
-    "node" : ">=6.0.0"
+  "engines": {
+    "node": ">=6.0.0"
   },
   "dependencies": {
     "@w33bletools/simpleutils": "^1.0.1",
