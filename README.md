@@ -4,7 +4,9 @@
 [![Build Status](https://travis-ci.org/w33ble/redux-promise-actions.svg?branch=master)](https://travis-ci.org/w33ble/redux-promise-actions)
 [![Coverage](https://img.shields.io/codecov/c/github/w33ble/redux-promise-actions.svg)](https://codecov.io/gh/w33ble/redux-promise-actions)
 [![npm](https://img.shields.io/npm/v/redux-promise-actions.svg)](https://www.npmjs.com/package/redux-promise-actions)
-![Project Status](https://img.shields.io/badge/status-experimental-orange.svg)
+![Project Status](https://img.shields.io/badge/status-deprecated-red.svg)
+
+> This project is no longer being maintained
 
 [Flux Standard Action](https://github.com/acdlite/flux-standard-action) promise utilities for Redux. 
 
